@@ -172,26 +172,6 @@
       .stat { padding: 1rem 1rem; }
       nav ul { gap: .8rem; }
     }
-  
-    /* VISITOR COUNTER */
-    .visitor-counter {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--card);
-      border: 2px solid var(--accent);
-      border-radius: 50px;
-      padding: 0.6rem 1.2rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--accent);
-      box-shadow: 0 2px 8px rgba(128, 0, 0, 0.1);
-      z-index: 999;
-    }
-    .visitor-counter:hover {
-      background: var(--accent-light);
-      box-shadow: 0 4px 12px rgba(128, 0, 0, 0.2);
-    }
 </style>
 </head>
 <body>
@@ -206,10 +186,6 @@
   </ul>
 </nav>
 
-<!-- VISITOR COUNTER -->
-<div class="visitor-counter">
-  👁️ Visitors: <span id="visitor-count">1</span>
-</div>
 
 
 <!-- HOME / HERO -->
@@ -525,25 +501,6 @@
     e.target.classList.add('active');
     document.getElementById(tabId).classList.add('active');
   }
-
-
-  // VISITOR COUNTER
-  function initVisitorCounter() {
-    const visitorKey = 'pageVisitors';
-    let visitors = localStorage.getItem(visitorKey);
-
-    if (visitors === null) {
-      visitors = 1;
-    } else {
-      visitors = parseInt(visitors) + 1;
-    }
-
-    localStorage.setItem(visitorKey, visitors);
-    document.getElementById('visitor-count').textContent = visitors;
-  }
-
-  // Initialize counter on page load
-  initVisitorCounter();
 </script>
 
 </body>
