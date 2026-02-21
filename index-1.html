@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Muhammad Ahsan Khan | Power Systems Researcher</title>
+  <style>
+    :root {
+      --accent: #800000;
+      --accent-dark: #5a0000;
+      --accent-light: #fdf2f2;
+      --accent-mid: #b30000;
+      --text: #1e1e2e;
+      --muted: #6b6b80;
+      --bg: #faf9f9;
+      --card: #ffffff;
+      --border: #e8dede;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* NAV */
+    nav {
+      background: var(--accent-dark);
+      border-bottom: 1px solid #3a0000;
+      position: sticky; top: 0; z-index: 100;
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 60px;
+    }
+    nav .logo { font-weight: 700; color: #fff; font-size: 1.05rem; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav ul a { text-decoration: none; color: rgba(255,255,255,0.8); font-size: .88rem; font-weight: 500; transition: color .2s; }
+    nav ul a:hover { color: #ffcccc; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #3a0000 0%, #800000 60%, #b30000 100%);
+      color: #fff; padding: 4rem 2rem 3rem;
+    }
+    .hero-inner {
+      max-width: 960px; margin: 0 auto;
+      display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;
+    }
+    .hero-left { flex: 0 0 auto; text-align: center; }
+    .hero .avatar {
+      width: 160px; height: 160px; border-radius: 50%;
+      background: rgba(255,255,255,0.15); border: 4px solid rgba(255,255,255,0.6);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 5rem; margin: 0 auto 0.8rem;
+      overflow: hidden;
+    }
+    .hero .avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+    .hero-right { flex: 1; min-width: 260px; }
+    .hero h1 { font-size: 2rem; font-weight: 700; margin-bottom: .4rem; }
+    .hero .tagline { font-size: .95rem; opacity: .88; margin-bottom: 1rem; }
+    .hero .objective {
+      background: rgba(255,255,255,0.1); border-left: 4px solid rgba(255,255,255,0.5);
+      border-radius: 0 8px 8px 0; padding: 1rem 1.2rem;
+      font-size: .92rem; line-height: 1.75; margin-bottom: 1.2rem;
+    }
+    .hero .badges { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.2rem; }
+    .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); border-radius: 999px; padding: .25rem .85rem; font-size: .78rem; font-weight: 500; }
+    .hero .links { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .btn { display: inline-flex; align-items: center; gap: .4rem; padding: .5rem 1.2rem; border-radius: 8px; font-size: .85rem; font-weight: 600; text-decoration: none; transition: all .2s; cursor: pointer; border: none; }
+    .btn-white { background: #fff; color: var(--accent); }
+    .btn-white:hover { background: #ffe0e0; }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.7); color: #fff; background: transparent; }
+    .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+    /* RESEARCH INTERESTS IN HERO */
+    .research-interests-bar {
+      background: rgba(0,0,0,0.25);
+      border-top: 1px solid rgba(255,255,255,0.15);
+      margin-top: 2.5rem; padding: 1.2rem 2rem;
+    }
+    .research-interests-bar .ri-inner {
+      max-width: 960px; margin: 0 auto;
+    }
+    .research-interests-bar h3 {
+      font-size: .75rem; text-transform: uppercase; letter-spacing: .1em;
+      color: rgba(255,255,255,0.65); margin-bottom: .7rem;
+    }
+    .research-interests-bar .ri-tags { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .ri-tag {
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px; padding: .3rem 1rem; font-size: .82rem; color: #fff; font-weight: 500;
+    }
+
+    /* STATS BAR */
+    .stats-bar { background: var(--card); border-bottom: 1px solid var(--border); display: flex; justify-content: center; flex-wrap: wrap; }
+    .stat { padding: 1.2rem 2.5rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat .num { font-size: 1.6rem; font-weight: 700; color: var(--accent); }
+    .stat .label { font-size: .72rem; color: var(--muted); text-transform: uppercase; letter-spacing: .05em; }
+
+    /* SECTION WRAPPER */
+    .section-wrap { padding: 4rem 2rem; max-width: 960px; margin: 0 auto; }
+    h2.section-title { font-size: 1.45rem; font-weight: 700; color: var(--text); margin-bottom: 1.8rem; padding-bottom: .6rem; border-bottom: 3px solid var(--accent); display: inline-block; }
+
+    /* EDUCATION */
+    .timeline { display: flex; flex-direction: column; gap: 1.3rem; }
+    .tl-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem 1.5rem; border-left: 4px solid var(--accent); }
+    .tl-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+    .tl-item .role { font-weight: 600; font-size: .97rem; }
+    .tl-item .org { color: var(--accent); font-size: .88rem; margin-top: .15rem; }
+    .tl-item .period { font-size: .82rem; color: var(--muted); white-space: nowrap; }
+    .tl-item .desc { font-size: .88rem; color: var(--muted); margin-top: .6rem; }
+    .tl-item .desc ul { margin-top: .3rem; padding-left: 1.1rem; }
+    .tl-item .desc li { margin-bottom: .2rem; }
+
+    /* SKILLS / SOFTWARE */
+    .skills-grid { display: flex; flex-wrap: wrap; gap: .6rem; }
+    .skill-tag { background: var(--accent-light); color: var(--accent); border: 1px solid #f0b8b8; border-radius: 999px; padding: .3rem .9rem; font-size: .82rem; font-weight: 500; }
+
+    /* SECTION TABS for Research */
+    .tab-nav { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 2rem; }
+    .tab-btn {
+      padding: .6rem 1.5rem; font-size: .9rem; font-weight: 600; cursor: pointer;
+      border: none; background: transparent; color: var(--muted);
+      border-bottom: 3px solid transparent; margin-bottom: -2px;
+      transition: all .2s;
+    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .tab-btn:hover { color: var(--accent); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; }
+
+    /* PUBLICATIONS */
+    .pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .pub-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem 1.5rem; border-left: 4px solid var(--accent); }
+    .pub-card .pub-title { font-weight: 600; font-size: .95rem; margin-bottom: .35rem; line-height: 1.5; }
+    .pub-card .pub-authors { font-size: .82rem; color: var(--muted); margin-bottom: .2rem; }
+    .pub-card .pub-meta { font-size: .82rem; color: var(--muted); }
+    .pub-card .pub-tags { margin-top: .55rem; display: flex; gap: .4rem; flex-wrap: wrap; }
+    .pub-tag { background: #fff5f5; color: var(--accent-mid); border: 1px solid #fcc; border-radius: 999px; padding: .15rem .6rem; font-size: .75rem; font-weight: 500; }
+    .pub-tag.cited { background: #fefce8; color: #a16207; border-color: #fde68a; }
+
+    /* DATASETS / CODES */
+    .ds-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+    .ds-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem; }
+    .ds-card .ds-icon { font-size: 1.6rem; margin-bottom: .6rem; }
+    .ds-card h3 { font-size: .95rem; font-weight: 600; margin-bottom: .4rem; }
+    .ds-card p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+    .ds-card a { display: inline-block; margin-top: .6rem; font-size: .82rem; color: var(--accent); font-weight: 600; text-decoration: none; }
+    .ds-card a:hover { text-decoration: underline; }
+
+    /* CONTACT */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .contact-info-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; }
+    .contact-info-card h3 { font-size: .85rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 1rem; }
+    .contact-row { display: flex; align-items: flex-start; gap: .8rem; padding: .55rem 0; border-bottom: 1px solid var(--border); font-size: .9rem; }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-row .ci-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: .1rem; }
+    .contact-row .ci-label { font-size: .75rem; color: var(--muted); }
+    .contact-row .ci-value { font-weight: 500; }
+    .contact-row a { color: var(--accent); text-decoration: none; }
+    .contact-row a:hover { text-decoration: underline; }
+    .contact-social-links { display: flex; flex-direction: column; gap: .8rem; }
+    .contact-btn { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: .9rem 1.4rem; font-size: .9rem; font-weight: 500; text-decoration: none; color: var(--text); display: flex; align-items: center; gap: .6rem; transition: all .2s; }
+    .contact-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+
+    /* FOOTER */
+    footer { text-align: center; padding: 2rem; color: var(--muted); font-size: .82rem; border-top: 1px solid var(--border); background: var(--card); }
+
+    .bg-alt { background: #f5eded; }
+
+    @media (max-width: 700px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .ds-grid, .contact-grid { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 1.55rem; }
+      .stat { padding: 1rem 1rem; }
+      nav ul { gap: .8rem; }
+    }
+  
+    /* VISITOR COUNTER */
+    .visitor-counter {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--card);
+      border: 2px solid var(--accent);
+      border-radius: 50px;
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent);
+      box-shadow: 0 2px 8px rgba(128, 0, 0, 0.1);
+      z-index: 999;
+    }
+    .visitor-counter:hover {
+      background: var(--accent-light);
+      box-shadow: 0 4px 12px rgba(128, 0, 0, 0.2);
+    }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Muhammad Ahsan Khan</div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- VISITOR COUNTER -->
+<div class="visitor-counter">
+  👁️ Visitors: <span id="visitor-count">1</span>
+</div>
+
+
+<!-- HOME / HERO -->
+<section id="home">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="avatar">👤</div>
+        <!-- Replace the emoji above with:
+          <img src="your-photo.jpg" alt="Muhammad Ahsan Khan">
+          once you add your photo -->
+      </div>
+      <div class="hero-right">
+        <h1>Muhammad Ahsan Khan</h1>
+        <p class="tagline">Researcher in Sector-Coupled Energy Systems & Decarbonization</p>
+        <div class="objective">
+        PhD researcher at Incheon National University (INU), South Korea, specializing in the development of optimized coordination frameworks for multi-energy systems. My research focuses on enabling synergistic integration of hydrogen energy within established power and water networks, addressing operational efficiency, decarbonization, and system resilience. I aim to advance sustainable energy transition strategies through optimization, sector coupling, and intelligent energy management.
+        </div>
+        <div class="badges">
+          <span class="badge">🎓 PhD — Electrical Engineering, INU</span>
+          <span class="badge">📍 Incheon, South Korea</span>
+        </div>
+        <div class="links">
+          <a href="https://www.linkedin.com/in/muhammad-ahsan-khan-88a952140/" target="_blank" class="btn btn-white">🔗 LinkedIn</a>
+          <a href="https://scholar.google.com/citations?user=pO__UocAAAAJ&hl=en" target="_blank" class="btn btn-outline">📄 Google Scholar</a>
+          <a href="mailto:ahsan1996@inu.ac.kr" class="btn btn-outline">✉️ Email Me</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Research Interests Bar at bottom of hero -->
+    <div class="research-interests-bar">
+      <div class="ri-inner">
+        <h3>Research Interests</h3>
+        <div class="ri-tags">
+          <span class="ri-tag"> Energy Policy and Economics</span>
+          <span class="ri-tag"> Multi-Energy Microgrid Operations</span>
+          <span class="ri-tag"> Green Hydrogen</span>
+          <span class="ri-tag"> Water-Energy Nexus</span>
+          <span class="ri-tag"> Energy management and system sizing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat"><div class="num">6+</div><div class="label">Q1 Publications</div></div>
+    <div class="stat"><div class="num">75+</div><div class="label">Citations</div></div>
+    <div class="stat"><div class="num">5</div><div class="label">H-Index</div></div>
+  </div>
+
+  <!-- EDUCATION -->
+  <div class="section-wrap">
+    <h2 class="section-title">Education</h2>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-header">
+          <div>
+            <div class="role">Ph.D. in Electrical Engineering</div>
+            <div class="org">Incheon National University (INU), South Korea</div>
+          </div>
+          <div class="period">2024 – 2026</div>
+        </div>
+        <div class="desc">
+          <p><strong>Thesis Title:</strong> Operation Strategies for Heterogeneous Multi-Energy Microgrids Under the Hydrogen-Water-Energy Nexus Paradigm</p>
+          <ul>
+            <li>6 Q1 journal publications · H-index 5 · 75+ citations</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-header">
+          <div>
+            <div class="role">M.Sc. in Electrical Engineering</div>
+            <div class="org">Incheon National University (INU), South Korea</div>
+          </div>
+          <div class="period">2021 – 2024</div>
+        </div>
+        <div class="desc">
+          <p><strong>Thesis Title:</strong> An Incentive-Based Mechanism to Enhance Energy Trading among Microgrids, EVs, and Grid</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-header">
+          <div>
+            <div class="role">B.Sc. in Electrical Engineering</div>
+            <div class="org">-</div>
+          </div>
+          <div class="period">2014 – 2018</div>
+        </div>
+        <div class="desc">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <div class="bg-alt">
+    <div class="section-wrap">
+      <h2 class="section-title">Experience</h2>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-header">
+            <div>
+              <div class="role">Research Assistant</div>
+              <div class="org">Incheon National University – Power and Renewable Energy Lab</div>
+            </div>
+            <div class="period">2021 – Present</div>
+          </div>
+          <div class="desc">
+            <ul>
+              <li>Designed and implemented mathematical optimization models for efficient operation of multi-energy systems</li>
+              <li>Assisted in project proposal and report preparations.</li>
+              <li>Developed optimization algorithms for complex energy systems.</li>
+              <li>Conducted research on modern energy transition paradigms and sustainable energy solutions.</li>
+              <li>Authored research articles and delivered conference presentations based on findings.</li>
+            </ul>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- SOFTWARE -->
+  <div class="section-wrap">
+    <h2 class="section-title">Software & Tools</h2>
+    <div class="skills-grid">
+      <span class="skill-tag">Python (PyPSA)</span>
+      <span class="skill-tag">CPLEX / OPL</span>
+      <span class="skill-tag">Visual Studio C++</span>
+      <span class="skill-tag">MATLAB / Simulink</span>
+      <span class="skill-tag">OPAL-RT HIL Simulation Platform</span>
+      <span class="skill-tag">LaTeX</span>
+    </div>
+  </div>
+</section>
+
+<!-- RESEARCH SECTION -->
+<section id="research" class="bg-alt">
+  <div class="section-wrap">
+    <h2 class="section-title">Research</h2>
+
+    <!-- TABS -->
+    <div class="tab-nav">
+      <button class="tab-btn active" onclick="switchTab(event, 'tab-pubs')">📄 Publications</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-datasets')">🗄️ Datasets</button>
+      <button class="tab-btn" onclick="switchTab(event, 'tab-codes')">💻 Codes</button>
+    </div>
+
+    <!-- PUBLICATIONS TAB -->
+    <div id="tab-pubs" class="tab-pane active">
+      <p style="font-size:.85rem; color:var(--muted); margin-bottom:1.2rem;">All publications in Q1 journals · <a href="https://scholar.google.com/citations?user=pO__UocAAAAJ&hl=en&oi=ao" target="_blank" style="color:var(--accent); font-weight:600;">View all on Google Scholar →</a></p>
+      <div class="pub-list">
+        <div class="pub-card">
+          <div class="pub-title">Day-ahead operation of a multi-energy microgrid community with shared hybrid energy storage and EV integration</div>
+          <div class="pub-authors">MA Khan, T Rehman, A Hussain, HM Kim</div>
+          <div class="pub-meta">Journal of Energy Storage 97, 112855 · 2024</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Q1</span>
+            <span class="pub-tag cited">Cited: 25</span>
+            <span class="pub-tag">Multi-Energy</span>
+            <span class="pub-tag">EV Integration</span>
+          </div>
+        </div>
+        <div class="pub-card">
+          <div class="pub-title">Optimal sizing of multi-energy microgrid with electric vehicle integration: Considering carbon emission and resilience load</div>
+          <div class="pub-authors">T Rehman, MA Khan, A Hussain, HM Kim</div>
+          <div class="pub-meta">Energy Reports 11, 4192-4212 · 2024</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Q1</span>
+            <span class="pub-tag cited">Cited: 22</span>
+            <span class="pub-tag">Optimal Sizing</span>
+            <span class="pub-tag">Resilience</span>
+          </div>
+        </div>
+        <div class="pub-card">
+          <div class="pub-title">Optimal operation of hydrogen-based multi-energy microgrid integrating water network and transportation sector</div>
+          <div class="pub-authors">MA Khan, T Rehman, HM Kim</div>
+          <div class="pub-meta">International Journal of Hydrogen Energy 97 · 2024</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Q1</span>
+            <span class="pub-tag cited">Cited: 9</span>
+            <span class="pub-tag">Green Hydrogen</span>
+            <span class="pub-tag">Water Network</span>
+          </div>
+        </div>
+        <div class="pub-card">
+          <div class="pub-title">Research on optimal design of multi-energy microgrid considering hybrid resilience load management and Carbon emissions</div>
+          <div class="pub-authors">T Rehman, MA Khan, HM Kim</div>
+          <div class="pub-meta">Sustainable Cities and Society 119, 106108 · 2025</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Q1</span>
+            <span class="pub-tag cited">Cited: 8</span>
+            <span class="pub-tag">Resilience</span>
+            <span class="pub-tag">Carbon Reduction</span>
+          </div>
+        </div>
+        <div class="pub-card">
+          <div class="pub-title">An incentive-based mechanism to enhance energy trading among microgrids, EVs, and grid</div>
+          <div class="pub-authors">MA Khan, A Hussain, WG Lee, HM Kim</div>
+          <div class="pub-meta">Energies 16(17), 6359 · 2023</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Q1</span>
+            <span class="pub-tag cited">Cited: 8</span>
+            <span class="pub-tag">Energy Trading</span>
+            <span class="pub-tag">EV Scheduling</span>
+          </div>
+        </div>
+        <div class="pub-card">
+          <div class="pub-title">Hierarchical energy management for heterogeneous multi-energy microgrid community: Integrating hydrogen into the water-energy nexus</div>
+          <div class="pub-authors">MA Khan, T Rehman, HM Kim</div>
+          <div class="pub-meta">Applied Energy 397, 126254 · 2025</div>
+          <div class="pub-tags">
+            <span class="pub-tag">Q1</span>
+            <span class="pub-tag cited">Cited: 3</span>
+            <span class="pub-tag">Hydrogen</span>
+            <span class="pub-tag">MEMG</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DATASETS TAB -->
+    <div id="tab-datasets" class="tab-pane">
+      <div class="ds-grid">
+        <div class="ds-card">
+          <p style="font-size: 1rem; color: var(--text); line-height: 1.6;">Please contact website owner</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CODES TAB -->
+    <div id="tab-codes" class="tab-pane">
+      <div class="ds-grid">
+        <div class="ds-card">
+          <p style="font-size: 1rem; color: var(--text); line-height: 1.6;"><strong>The following research codes are available upon request for potential collaboration:</strong></p>
+          <ul style="margin-top: 1rem; color: var(--text);">
+            <li><strong>Published Article Codes</strong></li>
+            <li>Power & Water Flow Models</li>
+            <li>MILP Optimization Models</li>
+            <li>Linear Approximation Methods</li>
+            <li>Multi-Energy Operation Models</li>
+            <li>Distributed Optimization Models (Consensus based ADMM, Consensus)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact">
+  <div class="section-wrap">
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-grid">
+      <div class="contact-info-card">
+        <h3>Contact Information</h3>
+        <div class="contact-row">
+          <span class="ci-icon">✉️</span>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-value"><a href="mailto:ahsan1996@inu.ac.kr">ahsan1996@inu.ac.kr</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="ci-icon">📍</span>
+          <div>
+            <div class="ci-label">Address</div>
+            <div class="ci-value">Department of Electrical Engineering<br>Incheon National University<br>119 Academy-ro, Yeonsu-gu<br>Incheon 22012, South Korea</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="ci-icon">🏛️</span>
+          <div>
+            <div class="ci-label">Institution</div>
+            <div class="ci-value"><a href="https://www.inu.ac.kr" target="_blank">Incheon National University (INU)</a></div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <span class="ci-icon">🌏</span>
+          <div>
+            <div class="ci-label">Open To</div>
+            <div class="ci-value">Postdoctoral positions in Canada · Academic collaborations</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-info-card">
+        <h3>Online Profiles</h3>
+        <div class="contact-social-links">
+          <a href="https://www.linkedin.com/in/muhammad-ahsan-khan-88a952140/" target="_blank" class="contact-btn">🔗 LinkedIn Profile</a>
+          <a href="https://scholar.google.com/citations?user=pO__UocAAAAJ&hl=en" target="_blank" class="contact-btn">📄 Google Scholar</a>
+          <a href="https://www.researchgate.net/" target="_blank" class="contact-btn">🔬 ResearchGate</a>
+          <a href="https://orcid.org/" target="_blank" class="contact-btn">🆔 ORCID</a>
+          <a href="https://github.com/" target="_blank" class="contact-btn">💻 GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  © 2025 Muhammad Ahsan Khan · PhD Researcher · Incheon National University · <a href="mailto:ahsan1996@inu.ac.kr" style="color:var(--accent);">ahsan1996@inu.ac.kr</a>
+</footer>
+
+<script>
+  function switchTab(e, tabId) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    e.target.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  }
+
+
+  // VISITOR COUNTER
+  function initVisitorCounter() {
+    const visitorKey = 'pageVisitors';
+    let visitors = localStorage.getItem(visitorKey);
+
+    if (visitors === null) {
+      visitors = 1;
+    } else {
+      visitors = parseInt(visitors) + 1;
+    }
+
+    localStorage.setItem(visitorKey, visitors);
+    document.getElementById('visitor-count').textContent = visitors;
+  }
+
+  // Initialize counter on page load
+  initVisitorCounter();
+</script>
+
+</body>
+</html>
