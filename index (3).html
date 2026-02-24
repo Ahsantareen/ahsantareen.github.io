@@ -126,6 +126,71 @@
     .tab-pane { display: none; }
     .tab-pane.active { display: block; }
 
+    /* SUB-TABS inside Publications */
+    .sub-tab-nav {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+      background: var(--accent-light);
+      border-radius: 10px;
+      padding: .35rem;
+      width: fit-content;
+    }
+    .sub-tab-btn {
+      padding: .45rem 1.3rem;
+      font-size: .85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      border-radius: 7px;
+      transition: all .2s;
+    }
+    .sub-tab-btn.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 2px 8px rgba(128,0,0,0.25);
+    }
+    .sub-tab-btn:hover:not(.active) {
+      background: rgba(128,0,0,0.1);
+      color: var(--accent);
+    }
+    .sub-tab-pane { display: none; }
+    .sub-tab-pane.active { display: block; }
+
+    /* Submitted badge */
+    .pub-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      background: #fff8e1;
+      color: #b45309;
+      border: 1px solid #fde68a;
+      border-radius: 999px;
+      padding: .2rem .7rem;
+      font-size: .75rem;
+      font-weight: 600;
+      margin-bottom: .6rem;
+    }
+    .pub-status-badge.under-review {
+      background: #eff6ff;
+      color: #1d4ed8;
+      border-color: #bfdbfe;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--muted);
+      background: var(--card);
+      border: 2px dashed var(--border);
+      border-radius: 12px;
+    }
+    .empty-state .empty-icon { font-size: 2.5rem; margin-bottom: .8rem; }
+    .empty-state p { font-size: .9rem; }
+
     /* PUBLICATIONS */
     .pub-list { display: flex; flex-direction: column; gap: 1.2rem; }
     .pub-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 1.3rem 1.5rem; border-left: 4px solid var(--accent); }
@@ -186,8 +251,6 @@
   </ul>
 </nav>
 
-
-
 <!-- HOME / HERO -->
 <section id="home">
   <div class="hero">
@@ -196,9 +259,6 @@
        <div class="avatar">
   <img src="https://github.com/Ahsantareen.png" alt="Muhammad Ahsan Khan">
 </div>
-        <!-- Replace the emoji above with:
-          <img src="your-photo.jpg" alt="Muhammad Ahsan Khan">
-          once you add your photo -->
       </div>
       <div class="hero-right">
         <h1>Muhammad Ahsan Khan</h1>
@@ -308,7 +368,6 @@
             </ul>
           </div>
         </div>
-        
       </div>
     </div>
   </div>
@@ -332,7 +391,7 @@
   <div class="section-wrap">
     <h2 class="section-title">Research</h2>
 
-    <!-- TABS -->
+    <!-- MAIN TABS -->
     <div class="tab-nav">
       <button class="tab-btn active" onclick="switchTab(event, 'tab-pubs')">📄 Publications</button>
       <button class="tab-btn" onclick="switchTab(event, 'tab-datasets')">🗄️ Datasets</button>
@@ -342,73 +401,110 @@
     <!-- PUBLICATIONS TAB -->
     <div id="tab-pubs" class="tab-pane active">
       <p style="font-size:.85rem; color:var(--muted); margin-bottom:1.2rem;">All publications in Q1 journals · <a href="https://scholar.google.com/citations?user=pO__UocAAAAJ&hl=en&oi=ao" target="_blank" style="color:var(--accent); font-weight:600;">View all on Google Scholar →</a></p>
-      <div class="pub-list">
-        <div class="pub-card">
-          <div class="pub-title">Day-ahead operation of a multi-energy microgrid community with shared hybrid energy storage and EV integration</div>
-          <div class="pub-authors">MA Khan, T Rehman, A Hussain, HM Kim</div>
-          <div class="pub-meta">Journal of Energy Storage 97, 112855 · 2024</div>
-          <div class="pub-tags">
-            <span class="pub-tag">Q1</span>
-            <span class="pub-tag cited">Cited: 25</span>
-            <span class="pub-tag">Multi-Energy</span>
-            <span class="pub-tag">EV Integration</span>
+
+      <!-- SUB-TABS: Published / Submitted -->
+      <div class="sub-tab-nav">
+        <button class="sub-tab-btn active" onclick="switchSubTab(event, 'subtab-published')">✅ Published Articles</button>
+        <button class="sub-tab-btn" onclick="switchSubTab(event, 'subtab-submitted')">📬 Submitted Articles</button>
+      </div>
+
+      <!-- PUBLISHED SUB-TAB -->
+      <div id="subtab-published" class="sub-tab-pane active">
+        <div class="pub-list">
+          <!-- 2025 -->
+          <div class="pub-card">
+            <div class="pub-title">Hierarchical energy management for heterogeneous multi-energy microgrid community: Integrating hydrogen into the water-energy nexus</div>
+            <div class="pub-authors">MA Khan, T Rehman, HM Kim</div>
+            <div class="pub-meta">Applied Energy 397, 126254 · 2025</div>
+            <div class="pub-tags">
+              <span class="pub-tag">Q1</span>
+              <span class="pub-tag cited">Cited: 3</span>
+              <span class="pub-tag">Hydrogen</span>
+              <span class="pub-tag">MEMG</span>
+            </div>
+          </div>
+          <div class="pub-card">
+            <div class="pub-title">Research on optimal design of multi-energy microgrid considering hybrid resilience load management and Carbon emissions</div>
+            <div class="pub-authors">T Rehman, MA Khan, HM Kim</div>
+            <div class="pub-meta">Sustainable Cities and Society 119, 106108 · 2025</div>
+            <div class="pub-tags">
+              <span class="pub-tag">Q1</span>
+              <span class="pub-tag cited">Cited: 8</span>
+              <span class="pub-tag">Resilience</span>
+              <span class="pub-tag">Carbon Reduction</span>
+            </div>
+          </div>
+          <!-- 2024 -->
+          <div class="pub-card">
+            <div class="pub-title">Day-ahead operation of a multi-energy microgrid community with shared hybrid energy storage and EV integration</div>
+            <div class="pub-authors">MA Khan, T Rehman, A Hussain, HM Kim</div>
+            <div class="pub-meta">Journal of Energy Storage 97, 112855 · 2024</div>
+            <div class="pub-tags">
+              <span class="pub-tag">Q1</span>
+              <span class="pub-tag cited">Cited: 25</span>
+              <span class="pub-tag">Multi-Energy</span>
+              <span class="pub-tag">EV Integration</span>
+            </div>
+          </div>
+          <div class="pub-card">
+            <div class="pub-title">Optimal sizing of multi-energy microgrid with electric vehicle integration: Considering carbon emission and resilience load</div>
+            <div class="pub-authors">T Rehman, MA Khan, A Hussain, HM Kim</div>
+            <div class="pub-meta">Energy Reports 11, 4192-4212 · 2024</div>
+            <div class="pub-tags">
+              <span class="pub-tag">Q1</span>
+              <span class="pub-tag cited">Cited: 22</span>
+              <span class="pub-tag">Optimal Sizing</span>
+              <span class="pub-tag">Resilience</span>
+            </div>
+          </div>
+          <div class="pub-card">
+            <div class="pub-title">Optimal operation of hydrogen-based multi-energy microgrid integrating water network and transportation sector</div>
+            <div class="pub-authors">MA Khan, T Rehman, HM Kim</div>
+            <div class="pub-meta">International Journal of Hydrogen Energy 97 · 2024</div>
+            <div class="pub-tags">
+              <span class="pub-tag">Q1</span>
+              <span class="pub-tag cited">Cited: 9</span>
+              <span class="pub-tag">Green Hydrogen</span>
+              <span class="pub-tag">Water Network</span>
+            </div>
+          </div>
+          <!-- 2023 -->
+          <div class="pub-card">
+            <div class="pub-title">An incentive-based mechanism to enhance energy trading among microgrids, EVs, and grid</div>
+            <div class="pub-authors">MA Khan, A Hussain, WG Lee, HM Kim</div>
+            <div class="pub-meta">Energies 16(17), 6359 · 2023</div>
+            <div class="pub-tags">
+              <span class="pub-tag">Q1</span>
+              <span class="pub-tag cited">Cited: 8</span>
+              <span class="pub-tag">Energy Trading</span>
+              <span class="pub-tag">EV Scheduling</span>
+            </div>
           </div>
         </div>
-        <div class="pub-card">
-          <div class="pub-title">Optimal sizing of multi-energy microgrid with electric vehicle integration: Considering carbon emission and resilience load</div>
-          <div class="pub-authors">T Rehman, MA Khan, A Hussain, HM Kim</div>
-          <div class="pub-meta">Energy Reports 11, 4192-4212 · 2024</div>
-          <div class="pub-tags">
-            <span class="pub-tag">Q1</span>
-            <span class="pub-tag cited">Cited: 22</span>
-            <span class="pub-tag">Optimal Sizing</span>
-            <span class="pub-tag">Resilience</span>
-          </div>
+      </div>
+
+      <!-- SUBMITTED SUB-TAB -->
+      <div id="subtab-submitted" class="sub-tab-pane">
+        <div class="empty-state">
+          <div class="empty-icon">📬</div>
+          <p style="font-weight:600; margin-bottom:.4rem; color:var(--text);">No submitted articles yet</p>
+          <p>Submitted manuscripts will appear here once available.<br>Check back soon or <a href="mailto:ahsan1996@inu.ac.kr" style="color:var(--accent);">contact directly</a> for updates.</p>
         </div>
-        <div class="pub-card">
-          <div class="pub-title">Optimal operation of hydrogen-based multi-energy microgrid integrating water network and transportation sector</div>
-          <div class="pub-authors">MA Khan, T Rehman, HM Kim</div>
-          <div class="pub-meta">International Journal of Hydrogen Energy 97 · 2024</div>
-          <div class="pub-tags">
-            <span class="pub-tag">Q1</span>
-            <span class="pub-tag cited">Cited: 9</span>
-            <span class="pub-tag">Green Hydrogen</span>
-            <span class="pub-tag">Water Network</span>
+        <!-- 
+          To add a submitted article, use this template:
+          <div class="pub-list">
+            <div class="pub-card">
+              <div class="pub-status-badge under-review">⏳ Under Review</div>
+              <div class="pub-title">Your Article Title Here</div>
+              <div class="pub-authors">Author1, Author2, HM Kim</div>
+              <div class="pub-meta">Submitted to: Journal Name · 2025</div>
+              <div class="pub-tags">
+                <span class="pub-tag">Topic 1</span>
+                <span class="pub-tag">Topic 2</span>
+              </div>
+            </div>
           </div>
-        </div>
-        <div class="pub-card">
-          <div class="pub-title">Research on optimal design of multi-energy microgrid considering hybrid resilience load management and Carbon emissions</div>
-          <div class="pub-authors">T Rehman, MA Khan, HM Kim</div>
-          <div class="pub-meta">Sustainable Cities and Society 119, 106108 · 2025</div>
-          <div class="pub-tags">
-            <span class="pub-tag">Q1</span>
-            <span class="pub-tag cited">Cited: 8</span>
-            <span class="pub-tag">Resilience</span>
-            <span class="pub-tag">Carbon Reduction</span>
-          </div>
-        </div>
-        <div class="pub-card">
-          <div class="pub-title">An incentive-based mechanism to enhance energy trading among microgrids, EVs, and grid</div>
-          <div class="pub-authors">MA Khan, A Hussain, WG Lee, HM Kim</div>
-          <div class="pub-meta">Energies 16(17), 6359 · 2023</div>
-          <div class="pub-tags">
-            <span class="pub-tag">Q1</span>
-            <span class="pub-tag cited">Cited: 8</span>
-            <span class="pub-tag">Energy Trading</span>
-            <span class="pub-tag">EV Scheduling</span>
-          </div>
-        </div>
-        <div class="pub-card">
-          <div class="pub-title">Hierarchical energy management for heterogeneous multi-energy microgrid community: Integrating hydrogen into the water-energy nexus</div>
-          <div class="pub-authors">MA Khan, T Rehman, HM Kim</div>
-          <div class="pub-meta">Applied Energy 397, 126254 · 2025</div>
-          <div class="pub-tags">
-            <span class="pub-tag">Q1</span>
-            <span class="pub-tag cited">Cited: 3</span>
-            <span class="pub-tag">Hydrogen</span>
-            <span class="pub-tag">MEMG</span>
-          </div>
-        </div>
+        -->
       </div>
     </div>
 
@@ -502,6 +598,13 @@
     document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
     e.target.classList.add('active');
     document.getElementById(tabId).classList.add('active');
+  }
+
+  function switchSubTab(e, subTabId) {
+    document.querySelectorAll('.sub-tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.sub-tab-pane').forEach(p => p.classList.remove('active'));
+    e.target.classList.add('active');
+    document.getElementById(subTabId).classList.add('active');
   }
 </script>
 
