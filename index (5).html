@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Ahsan Khan | Energy Systems Researcher</title>
+<style>
+  /* ============================================================
+     THEME — dark developer style. Edit colors here.
+     ============================================================ */
+  :root{
+    --bg:        #0d1117;
+    --bg-alt:    #161b22;
+    --border:    #30363d;
+    --text:      #c9d1d9;
+    --muted:     #8b949e;
+    --accent:    #58a6ff;
+    --accent-2:  #3fb950;
+    --mono: "SF Mono", "Fira Code", Consolas, "Courier New", monospace;
+    --sans: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+
+  /* ============================================================
+     NAV — Home | Research (dropdown) | Contact
+     ============================================================ */
+  nav{
+    position:sticky;top:0;z-index:10;
+    background:rgba(13,17,23,.95);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:.8rem 2rem;flex-wrap:wrap;gap:.5rem;
+  }
+  nav .logo{font-family:var(--mono);color:var(--accent-2);font-size:.95rem}
+  nav ul{display:flex;gap:.4rem;list-style:none;align-items:center}
+  nav li{position:relative}
+  .nav-btn{
+    font-family:var(--mono);font-size:.9rem;color:var(--muted);
+    background:none;border:1px solid transparent;border-radius:6px;
+    padding:.4rem .85rem;cursor:pointer;
+  }
+  .nav-btn:hover{color:var(--accent)}
+  .nav-btn.active{color:var(--accent);border-color:var(--border);background:var(--bg-alt)}
+
+  /* -------- dropdown -------- */
+  .dropdown{
+    display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:190px;
+    background:var(--bg-alt);border:1px solid var(--border);border-radius:8px;
+    padding:.4rem;box-shadow:0 8px 24px rgba(0,0,0,.5);
+  }
+  li.has-dropdown:hover .dropdown, li.has-dropdown:focus-within .dropdown{display:block}
+  .dropdown button{
+    display:block;width:100%;text-align:left;
+    font-family:var(--mono);font-size:.85rem;color:var(--text);
+    background:none;border:none;border-radius:6px;
+    padding:.5rem .7rem;cursor:pointer;
+  }
+  .dropdown button:hover{background:var(--bg);color:var(--accent)}
+
+  /* ============================================================
+     PAGES — only one visible at a time
+     ============================================================ */
+  .page{display:none}
+  .page.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  /* ============================================================
+     HERO — replace 'YOUR_IMAGE_HERE.jpg' with your power-system
+     optimization image (or a base64 data URI to stay single-file)
+     ============================================================ */
+  header.hero{
+    position:relative;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    background:
+      linear-gradient(rgba(13,17,23,.82), rgba(13,17,23,.94)),
+      url('YOUR_IMAGE_HERE.jpg') center/cover no-repeat,
+      repeating-linear-gradient(0deg, transparent, transparent 39px, #1c2430 40px),
+      repeating-linear-gradient(90deg, transparent, transparent 39px, #1c2430 40px);
+    border-bottom:1px solid var(--border);
+  }
+  .hero-inner{max-width:860px;padding:3.5rem 1.5rem}
+
+  /* -------- profile picture: replace 'YOUR_PHOTO_HERE.jpg' -------- */
+  .avatar{
+    width:150px;height:150px;border-radius:50%;object-fit:cover;
+    border:3px solid var(--accent);box-shadow:0 0 25px rgba(88,166,255,.35);
+    margin-bottom:1.2rem;background:var(--bg-alt);
+  }
+  .hero .prompt{font-family:var(--mono);color:var(--accent-2);font-size:.95rem;margin-bottom:.8rem}
+  .hero h1{font-size:2.5rem;letter-spacing:-.5px;color:#f0f6fc}
+  .hero h2{font-size:1.1rem;font-weight:400;color:var(--accent);font-family:var(--mono);margin:.6rem 0 1.2rem}
+  .hero p{color:var(--muted);font-size:1rem;max-width:720px;margin:0 auto 1.5rem}
+  .hero .links{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;font-family:var(--mono);font-size:.85rem}
+  .hero .links a{border:1px solid var(--border);padding:.45rem .9rem;border-radius:6px;background:rgba(22,27,34,.7)}
+  .hero .links a:hover{border-color:var(--accent);text-decoration:none}
+
+  /* -------- stats (citations / h-index) -------- */
+  .stats{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin:1.6rem 0}
+  .stat{
+    background:rgba(22,27,34,.8);border:1px solid var(--border);border-radius:8px;
+    padding:.9rem 1.4rem;min-width:130px;
+  }
+  .stat .num{font-family:var(--mono);font-size:1.5rem;color:var(--accent-2);font-weight:700}
+  .stat .lbl{font-size:.8rem;color:var(--muted);font-family:var(--mono)}
+
+  /* ============================================================
+     SECTIONS
+     ============================================================ */
+  main{max-width:900px;margin:0 auto;padding:0 1.5rem}
+  section{padding:3rem 0}
+  h3.section-title{font-family:var(--mono);font-size:1.3rem;color:#f0f6fc;margin-bottom:1.6rem}
+  h3.section-title::before{content:"// ";color:var(--accent-2)}
+  h4.subsection{font-family:var(--mono);font-size:.95rem;color:var(--accent);margin:1.6rem 0 .8rem}
+
+  .card{
+    background:var(--bg-alt);border:1px solid var(--border);border-radius:8px;
+    padding:1rem 1.2rem;margin-bottom:.8rem;
+  }
+  .card:hover{border-color:var(--accent)}
+  .card .title{color:#f0f6fc;font-weight:600}
+  .card .desc{color:var(--muted);font-size:.92rem;margin-top:.3rem}
+  .card .meta{font-family:var(--mono);font-size:.8rem;color:var(--accent-2);margin-top:.2rem}
+  .card .plink{font-family:var(--mono);font-size:.8rem;display:inline-block;margin-top:.4rem}
+  .card .status{font-family:var(--mono);font-size:.78rem;color:var(--muted);margin-top:.4rem}
+
+  .note{color:var(--muted);font-family:var(--mono);font-size:.95rem}
+
+  /* -------- current research focus tags -------- */
+  .tags{display:flex;gap:.6rem;flex-wrap:wrap}
+  .tag{
+    font-family:var(--mono);font-size:.82rem;color:var(--accent);
+    border:1px solid var(--border);background:var(--bg-alt);
+    padding:.35rem .8rem;border-radius:999px;
+  }
+
+  /* -------- skills: category → tools -------- */
+  .skill-cat{margin-bottom:1.4rem}
+  .skill-cat .cat{
+    font-family:var(--mono);font-size:.9rem;color:var(--accent);margin-bottom:.6rem;
+  }
+  .skill-row{display:flex;gap:.6rem;flex-wrap:wrap}
+  .chip{
+    font-family:var(--mono);font-size:.85rem;color:var(--text);
+    background:var(--bg-alt);border:1px solid var(--border);border-radius:6px;
+    padding:.4rem .85rem;
+  }
+  .chip:hover{border-color:var(--accent-2)}
+
+  footer{
+    border-top:1px solid var(--border);margin-top:2rem;
+    padding:2rem 1.5rem;text-align:center;color:var(--muted);
+    font-family:var(--mono);font-size:.8rem;
+  }
+  @media(max-width:600px){
+    .hero h1{font-size:1.9rem}
+    nav{padding:.8rem 1rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================================================
+     NAV: Home | Research ▾ | Contact
+     ================================================== -->
+<nav>
+  <span class="logo">~/ahsan-khan $</span>
+  <ul>
+    <li><button class="nav-btn active" data-page="home">🏠 Home</button></li>
+    <li class="has-dropdown">
+      <button class="nav-btn" id="research-btn">🔬 Research ▾</button>
+      <div class="dropdown">
+        <button data-page="publications">📄 Publications</button>
+        <button data-page="projects">🧩 Projects</button>
+        <button data-page="skills">🛠️ Skills</button>
+        <button data-page="dataset">🗄️ Dataset</button>
+        <button data-page="code">💻 Code</button>
+      </div>
+    </li>
+    <li><button class="nav-btn" data-page="contact">✉️ Contact</button></li>
+  </ul>
+</nav>
+
+<!-- ==================================================
+     PAGE: HOME  (intro + stats + focus + education)
+     ================================================== -->
+<div class="page active" id="page-home">
+  <header class="hero">
+    <div class="hero-inner">
+      <!-- Replace src with your photo file or base64 data URI -->
+      <img class="avatar" src="YOUR_PHOTO_HERE.jpg" alt="Muhammad Ahsan Khan">
+      <div class="prompt">$ whoami</div>
+      <h1>Muhammad Ahsan Khan</h1>
+      <h2>⚡ Sector-Coupled Energy Systems &amp; Decarbonization</h2>
+      <p>🎓 PhD researcher at Incheon National University (INU), South Korea, specializing in
+         optimized coordination frameworks for multi-energy systems — integrating hydrogen
+         within power and water networks through optimization, sector coupling, and
+         intelligent energy management.</p>
+
+      <div class="stats">
+        <div class="stat"><div class="num">6+</div><div class="lbl">Q1 Publications</div></div>
+        <div class="stat"><div class="num">75+</div><div class="lbl">Citations</div></div>
+        <div class="stat"><div class="num">5</div><div class="lbl">H-Index</div></div>
+      </div>
+
+      <div class="links">
+        <a href="#">🔗 LinkedIn</a>
+        <a href="#">📄 Google Scholar</a>
+        <!-- Replace # with your lab's website URL -->
+        <a href="#">🏛️ Power &amp; Renewable Energy Lab</a>
+        <a href="mailto:ahsan1996@inu.ac.kr">✉️ Email</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Current research focus -->
+    <section>
+      <h3 class="section-title">🎯 Current Research Focus</h3>
+      <div class="tags">
+        <span class="tag">⚡ Multi-Energy Microgrid Operations</span>
+        <span class="tag">💧 Water-Energy Nexus</span>
+        <span class="tag">🟢 Green Hydrogen</span>
+        <span class="tag">📊 Energy Management &amp; System Sizing</span>
+        <span class="tag">🏦 Energy Policy and Economics</span>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h3 class="section-title">🎓 Education</h3>
+      <div class="card">
+        <div class="title">Ph.D. in Electrical Engineering</div>
+        <div class="meta">Incheon National University (INU), South Korea · 2024 – 2026</div>
+        <div class="desc">Thesis: Operation Strategies for Heterogeneous Multi-Energy Microgrids Under the Hydrogen-Water-Energy Nexus Paradigm</div>
+      </div>
+      <div class="card">
+        <div class="title">MS in Electrical Engineering</div>
+        <div class="meta">Incheon National University (INU), South Korea · 2021 – 2024</div>
+        <div class="desc">Thesis: An Incentive-Based Mechanism to Enhance Energy Trading among Microgrids, EVs, and Grid</div>
+      </div>
+      <div class="card">
+        <div class="title">BS in Electrical Engineering</div>
+        <div class="meta">COMSATS University Islamabad, Pakistan · 2014 – 2018</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- ==================================================
+     PAGE: PUBLICATIONS
+     ================================================== -->
+<div class="page" id="page-publications">
+<main>
+<section>
+  <h3 class="section-title">📄 Publications</h3>
+
+  <h4 class="subsection">✅ [1] Published</h4>
+  <div class="card">
+    <div class="title">Hierarchical energy management for heterogeneous multi-energy microgrid community: Integrating hydrogen into the water-energy nexus</div>
+    <a class="plink" href="#">→ link</a>
+  </div>
+  <div class="card">
+    <div class="title">Research on optimal design of multi-energy microgrid considering hybrid resilience load management and carbon emissions</div>
+    <a class="plink" href="#">→ link</a>
+  </div>
+  <div class="card">
+    <div class="title">Day-ahead operation of a multi-energy microgrid community with shared hybrid energy storage and EV integration</div>
+    <a class="plink" href="#">→ link</a>
+  </div>
+  <div class="card">
+    <div class="title">Optimal sizing of multi-energy microgrid with electric vehicle integration: Considering carbon emission and resilience load</div>
+    <a class="plink" href="#">→ link</a>
+  </div>
+  <div class="card">
+    <div class="title">Optimal operation of hydrogen-based multi-energy microgrid integrating water network and transportation sector</div>
+    <a class="plink" href="#">→ link</a>
+  </div>
+  <div class="card">
+    <div class="title">An incentive-based mechanism to enhance energy trading among microgrids, EVs, and grid</div>
+    <a class="plink" href="#">→ link</a>
+  </div>
+
+  <h4 class="subsection">📬 [2] Submitted</h4>
+  <div class="card">
+    <div class="title">Participation Assessment of Diverse Multi-Energy Microgrids in Integrated Power–Water Distribution Systems Considering Outages</div>
+    <div class="status">⏳ Under Review</div>
+  </div>
+  <div class="card">
+    <div class="title">Resilience Oriented Coordinated Optimal Operation of Distribution System with Virtual Power Plant</div>
+    <div class="status">⏳ Under Review</div>
+  </div>
+  <div class="card">
+    <div class="title">Resilience-Oriented Hybrid Operation Strategy for Distribution Systems Considering Dynamic Energy Storage Reserves</div>
+    <div class="status">⏳ Under Review</div>
+  </div>
+</section>
+</main>
+</div>
+
+<!-- ==================================================
+     PAGE: RESEARCH PROJECTS
+     ================================================== -->
+<div class="page" id="page-projects">
+<main>
+<section>
+  <h3 class="section-title">🧩 Research Projects</h3>
+  <div class="card">
+    <div class="title">⚙️ Hybrid Operation Strategy for Resilient Distribution Systems</div>
+    <div class="desc">Auto-configuration and self-healing strategies for resilient distribution system operation.</div>
+  </div>
+  <div class="card">
+    <div class="title">🔀 Distributed Algorithm for Power Loss, Voltage Deviation and Frequency Regulation</div>
+    <div class="desc">Consensus-based distributed optimization for loss minimization, voltage regulation, and frequency control.</div>
+  </div>
+</section>
+</main>
+</div>
+
+<!-- ==================================================
+     PAGE: SKILLS — SOFTWARE & TOOLS (by category)
+     ================================================== -->
+<div class="page" id="page-skills">
+<main>
+<section>
+  <h3 class="section-title">🛠️ Software &amp; Tools</h3>
+
+  <div class="skill-cat">
+    <div class="cat">🐍 Programming Languages</div>
+    <div class="skill-row">
+      <span class="chip">Python</span>
+      <span class="chip">C++</span>
+      <span class="chip">MATLAB</span>
+    </div>
+  </div>
+
+  <div class="skill-cat">
+    <div class="cat">📐 Optimization Tools</div>
+    <div class="skill-row">
+      <span class="chip">CPLEX</span>
+      <span class="chip">GAMSPy</span>
+      <span class="chip">PyPSA</span>
+    </div>
+  </div>
+
+  <div class="skill-cat">
+    <div class="cat">🔌 Simulation Tools</div>
+    <div class="skill-row">
+      <span class="chip">MATLAB / Simulink</span>
+      <span class="chip">OPAL-RT (HIL)</span>
+    </div>
+  </div>
+
+  <div class="skill-cat">
+    <div class="cat">📝 Research Writing</div>
+    <div class="skill-row">
+      <span class="chip">LaTeX</span>
+      <span class="chip">G-Suite</span>
+    </div>
+  </div>
+</section>
+</main>
+</div>
+
+<!-- ==================================================
+     PAGE: DATASET
+     ================================================== -->
+<div class="page" id="page-dataset">
+<main>
+<section>
+  <h3 class="section-title">🗄️ Dataset</h3>
+  <p class="note">Dataset will be uploaded soon.</p>
+</section>
+</main>
+</div>
+
+<!-- ==================================================
+     PAGE: CODE
+     ================================================== -->
+<div class="page" id="page-code">
+<main>
+<section>
+  <h3 class="section-title">💻 Code</h3>
+  <div class="card">
+    <div class="title">🐙 GitHub Repository</div>
+    <div class="desc">Research codes: MILP optimization models, power &amp; water flow models, distributed optimization (consensus-based ADMM).</div>
+    <!-- Replace # with your GitHub repository URL -->
+    <a class="plink" href="#">→ github.com/your-repo</a>
+  </div>
+</section>
+</main>
+</div>
+
+<!-- ==================================================
+     PAGE: CONTACT
+     ================================================== -->
+<div class="page" id="page-contact">
+<main>
+<section>
+  <h3 class="section-title">✉️ Contact</h3>
+  <div class="card">
+    <div class="desc">✉️ ahsan1996@inu.ac.kr</div>
+    <div class="desc">📍 Room 107, Building 9, Incheon National University, 119 Academy-ro, Yeonsu-gu, Incheon, South Korea</div>
+    <div class="desc">🏛️ Incheon National University (INU)</div>
+    <div class="desc">🌏 Open to academic collaborations</div>
+  </div>
+</section>
+</main>
+</div>
+
+<footer>
+  © 2026 Muhammad Ahsan Khan · built with plain HTML/CSS · 💻⚡
+</footer>
+
+<!-- ============================================================
+     PAGE SWITCHING — vanilla JS, no libraries
+     ============================================================ -->
+<script>
+  const researchPages = ['publications','projects','skills','dataset','code'];
+  function showPage(name){
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + name).classList.add('active');
+    // highlight the right top-level nav item
+    document.querySelectorAll('nav .nav-btn').forEach(b => b.classList.remove('active'));
+    if (name === 'home') document.querySelector('[data-page="home"]').classList.add('active');
+    else if (name === 'contact') document.querySelector('[data-page="contact"]').classList.add('active');
+    else if (researchPages.includes(name)) document.getElementById('research-btn').classList.add('active');
+    window.scrollTo({top:0});
+  }
+  document.querySelectorAll('button[data-page]').forEach(btn => {
+    btn.addEventListener('click', () => showPage(btn.dataset.page));
+  });
+</script>
+
+</body>
+</html>
